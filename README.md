@@ -1,0 +1,10 @@
+=> Profile
+    => identificatio
+    => XP amount
+    => grades??
+    => skills
+=> Graghs
+    => xp earend in a time
+    => project PASS and FAIL ratio
+    => xp per project
+    => attempts for each project
