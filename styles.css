@@ -7,21 +7,22 @@
   body {
     font-family: Arial, sans-serif;
     background-color: #333333;
+  }
+  
+  .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
   
-  .login-container {
+  .login-box {
     width: 100%;
     max-width: 600px;
   }
-  
+
   .logo {
     display: block;
-    width: 200px;
-    height: 200px;
     margin: auto;
   }
   
@@ -66,7 +67,7 @@
   }
 
   .hidden {
-    display: none;
+    display: none !important;
   }
 
   button {
@@ -86,12 +87,99 @@
     background-color: #005da0;
   }
   
+  .profile-section {
+    display: flex;
+    width: 95%;
+    margin: 20px auto;
+  }
+
+ #user-name, #level, #xp {
+    display: inline-block;
+    position: relative;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    box-shadow: 0px 1px 5px .1px #9969ff91;
+    background-color: #999;
+    margin: 10px;
+  }
+
+  #level, #xp {
+    top: 10px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-section {
+    position: relative;
+  }
+
+  #user-name span, #level span, #xp span {
+    position: absolute;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .user-info .info {
+    display: inline-block;
+    position: relative;
+    color: #f9f9f9;
+    top: -30px;
+    margin-left: 5px;
+  }
+
+  #full-name {
+    font-size: 18px;  
+    font-weight: bold;
+  }
+
+  #campus {
+    font-size: 14px;
+    color: rgb(185, 185, 185);
+    margin-top: 3px;
+  }
+
+  .user-progress {
+    position: absolute;
+    right: 0;
+  }
+
+  .des {
+    font-size: 12px !important;
+    text-transform: none !important;
+    font-weight: normal !important;
+    position: absolute !important;
+    top: 60px !important;
+    left: 50% !important;
+    color: rgba(0, 0, 0, 0.7) !important;
+    transform: translateX(-50%);
+  }
+
+  #campus::before {
+    display: inline-block;
+    position: relative;
+    left: -4px;
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: #9969ff;
+    border-radius: 50%;
+  }
+
+  #br {
+    position: absolute;
+    top: 115px;
+    width: 100%;
+    /* left: 10%; */
+    height: 2px;
+    border-radius: 1px;
+    background-color: #9869ff;
+  }
+
   /* Responsive Design */
-  @media (max-width: 600px) {
-    .login-container {
-      padding: 10px;
-    }
-  
+  @media (max-width: 500px) {
     .login-box {
       padding: 20px;
     }
@@ -99,5 +187,35 @@
     input[type="text"], input[type="password"], button {
       font-size: 14px;
     }
+
+    .user-progress {
+      display: flex;
+      justify-content: space-around;
+      bottom: -110px;
+      width: 100%;
+    }
+
+    .user-info {
+      width: 100%;
+      text-align: center;
+    }
+
+    .user-info #user-name {
+      display: block;
+      margin: auto;
+    }
+
+    .user-info .info {
+      top: 5px;
+    }
+
+    #br {
+      position: absolute;
+      top: 145px;
+      width: 80%;
+      left: 10%;
+      height: 2px;
+      border-radius: 1px;
+      background-color: #9869ff;
+    }
   }
-  

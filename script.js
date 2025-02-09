@@ -1,10 +1,11 @@
-import { getToken, graphQlEndPoint } from "./login.js";
+import { login } from "./login.js";
+import { userIdentification } from "./userIdentification.js";
 
 document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault()
     const usernameField = document.getElementById("identifier");
     const passwordField = document.getElementById("password");
-    getToken(usernameField.value, passwordField.value)
+    login(usernameField.value, passwordField.value)
     usernameField.value = "";
     passwordField.value = "";
 })
@@ -24,8 +25,9 @@ document.querySelector('#toggle-password').addEventListener("click", () => {
 })
 
 const token = localStorage.getItem("jwt");
-console.log(token);
 
 if (token) {
-    // graphQlEndPoint(token);
+  userIdentification(token);
+} else {
+  document.querySelector(".login-container").classList.remove("hidden");
 }

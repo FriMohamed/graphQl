@@ -1,4 +1,4 @@
-export async function getToken(identifier, password) {
+export async function login(identifier, password) {
     const base64Credentials = btoa(`${identifier}:${password}`);
     const respons = await fetch("https://learn.zone01oujda.ma/api/auth/signin", {
         method: "POST",
@@ -12,36 +12,31 @@ export async function getToken(identifier, password) {
         localStorage.setItem('jwt', token);
         setTimeout(() => {
             document.querySelector(".login-container").classList.add("hidden");
-            // graphQlEndPoint(token);
-
+            queryData(token);
         }, 100)
     } else {
         document.querySelector(".login-error").classList.remove("hidden");
     }
 }
 
-export async function graphQlEndPoint(token) {
+export async function queryData(token, query) {
     const respons = await fetch("https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql", {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-            query: `query {
-                        user {
-                            login
-                        }
-                    }`
+            query: query
         })
     });
 
-    console.log(respons);
+    const data = await respons.json();
+    // console.log(data);
     
-
-    if (respons.ok) {
-        const data = await respons.json();
+    
+    if (data.data) {
         document.querySelector(".profile-section").classList.remove("hidden");
-        document.querySelector(".user-identification").textContent = data.data.user[0].login
+        return data.data
     } else {
         document.querySelector(".login-container").classList.remove("hidden");
     }
