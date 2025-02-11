@@ -1,6 +1,6 @@
-import { queryData } from "./login.js"
+import { setLogOutLogic, queryData } from "./login.js"
 
-const userInfoQuery = `{
+export const userInfoQuery = `{
     user {
         login
         firstName
@@ -13,18 +13,27 @@ const userInfoQuery = `{
     }  
 }`
 
-export async function userIdentification(token) {
+export async function renderUserInfo(token) {
     const data = await queryData(token, userInfoQuery);
     if (data) {
         document.querySelector("#user-name span").textContent = data.user[0].login;
         document.querySelector("#full-name").textContent = data.user[0].firstName + " " + data.user[0].lastName;
         document.querySelector("#campus").textContent = data.user[0].campus;
-        let level = 0, xp = 0;
+        let level = 0, xp = 0, unit = "KB";
         data.transaction.forEach(el => {
-            if (el.type == "level") level = el.amount
-            else xp += el.amount
+            if (el.type == "level") level = el.amount;
+            else xp += el.amount;
         });
         document.querySelector("#level span").textContent = level;
-        document.querySelector("#xp span").textContent = Math.round(xp / 1000);
+        if (xp / 1000 >= 1000) {
+            xp = (xp / 10000).toFixed(2);
+            unit = "MB"
+        } else xp = Math.round(xp / 1000);
+        document.querySelector("#xp span").textContent = xp;
+        document.querySelector("#xp .des").textContent = unit;
+        setLogOutLogic();
+        return 1
+    } else {
+        return 0
     }
 }
