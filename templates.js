@@ -38,6 +38,10 @@ const profileHtml = `
       </div>
       <span id="br"></span>
       <div class="user-progress">
+        <div id="ratio">
+          <span></span>
+          <span class="des">ratio</span>
+        </div>
         <div id="level">
           <span></span>
           <span class="des">level</span>
@@ -51,13 +55,20 @@ const profileHtml = `
 
     <div class="module-graphs">
       <div class="graph">
+        <svg id="module-xpByTime">
+        </svg>
       </div>
-      <div class="graph">
-      </div>
-      <div class="graph">
+      <div class="graph" id="skills">
+        <svg id="module-skills">
+        </svg>
+        <div id="prevent">Prev</div>
+        <div id="next">Next</div>
       </div>
     </div>
+    <div class="js-graphs">
+      
+    </div>    
   </div>
 `;
 
-export {loginHtml, profileHtml}
+export { loginHtml, profileHtml }

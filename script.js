@@ -1,4 +1,5 @@
 import { queryData, setLoginEvents } from "./login.js";
+import { renderModuleGraphs } from "./moduleGraphs.js";
 import { loginHtml, profileHtml } from "./templates.js";
 import { renderUserInfo } from "./userIdentification.js";
 
@@ -18,3 +19,5 @@ if (token) {
   document.body.innerHTML = loginHtml;
   setLoginEvents();
 }
+
+// renderModuleGraphs()

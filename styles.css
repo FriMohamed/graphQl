@@ -99,7 +99,8 @@ button:hover {
 
 #user-name,
 #level,
-#xp {
+#xp,
+#ratio {
   display: inline-block;
   position: relative;
   width: 95px;
@@ -120,6 +121,7 @@ button:hover {
 }
 
 #level,
+#ratio,
 #xp {
   top: 10px;
   width: 80px;
@@ -132,7 +134,8 @@ button:hover {
 
 #user-name span,
 #level span,
-#xp span {
+#xp span,
+#ratio span {
   position: absolute;
   color: rgba(0, 0, 0, 0.8);
   font-weight: bold;
@@ -209,16 +212,35 @@ button:hover {
 
 /* Graph style */
 .graph {
-  flex: 1 1 30%;
-  min-width: 350px;
+  position: relative;
+  flex: 1 1 45%;
+  min-width: 400px;
   height: 400px;
-  background-color: #f0f0f0;
+  background-color: #888;
   border-radius: 8px;
 }
 
-svg {
+.graph svg {
+  width: 100%;
+  min-height: 100%;
+}
+
+#skills div {
+  position: absolute;
+  cursor: pointer;
   border: 1px solid;
-  margin:1%;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+#prevent {
+  left: 5px;
+  bottom: 5px;
+}
+
+#next {
+  right: 5px;
+  bottom: 5px;
 }
 
 /* Responsive Design */
