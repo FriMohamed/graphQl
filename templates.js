@@ -22,7 +22,7 @@ const loginHtml = `
 `;
 
 const profileHtml = `
-  <div class="profile">
+  <div class="profile" id="profile">
     <div class="profile-info">
       <div class="user-info">
         <div id="user-name">
@@ -65,10 +65,17 @@ const profileHtml = `
         <div id="next">Next</div>
       </div>
     </div>
-    <div class="js-graphs">
-      
+    <div id="piscines">
+      <select id="piscine-select">
+        <option value="piscine-go" selected>Piscine-Go</option>
+        <option value="module/piscine-js">Piscine-Js</option>
+      </select>
+      <div id="p-level">Level: <span></span></div>
+      <div id="p-xp">XP:  <span></span></div>
+      <div class="p-graph2">
+        <svg></svg>
+      </div>
     </div>    
   </div>
 `;
-
 export { loginHtml, profileHtml }

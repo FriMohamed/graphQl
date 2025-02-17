@@ -1,4 +1,5 @@
 import { renderModuleGraphs } from "./moduleGraphs.js";
+import { getPiscinsData } from "./piscines.js";
 import { loginHtml, profileHtml } from "./templates.js";
 import { renderUserInfo } from "./userIdentification.js";
 
@@ -19,7 +20,8 @@ async function login(identifier, password) {
             if (await queryData(token, "{user{id}}")) {
                 document.body.innerHTML = profileHtml;
                 renderUserInfo(token);
-                renderModuleGraphs();
+                renderModuleGraphs(token);
+                getPiscinsData("piscine-go");
             }
         }, 100)
     } else {
@@ -39,7 +41,7 @@ async function queryData(token, query) {
     });
 
     const data = await respons.json();
-    return data.data ? data.data : 0 
+    return data.data ? data.data : null 
 }
 
 function setLoginEvents() {

@@ -2,6 +2,7 @@ import { debounce } from "./helpers.js";
 import { drawSkillsGraph, radialG } from "./skillGraph.js";
 import { drawSimpleGraph } from "./simpleGraph.js";
 import { queryData } from "./login.js";
+import { renderGraph } from "./piscines.js";
 
 const moduleGraphsQuery = `
     {
@@ -21,14 +22,13 @@ const moduleGraphsQuery = `
 }
 `;
 
-const max = (a, b) => a > b ? a : b
+const max = (a, b) => a > b ? a : b;
 let xpByTimeData = [], skills = new Map(), totaleXp = 0;
-async function renderModuleGraphs() {
+async function renderModuleGraphs(token) {
     xpByTimeData = [];
     skills = new Map();
     totaleXp = 0;
     radialG.start = 0;
-    const token = localStorage.getItem("jwt");
     const data = await queryData(token, moduleGraphsQuery);
     data.transaction.forEach(el => {
         if (el.type == "xp") {
@@ -45,30 +45,35 @@ async function renderModuleGraphs() {
     drawSimpleGraph(xpByTimeData, document.getElementById("module-xpByTime"), totaleXp);
     const skillsArr = [...skills];
     skills = skillsArr.sort((a, b) => b[1] - a[1]);
+    setSkillGraphsEvents();
+    drawSkillsGraph(skills, document.getElementById("module-skills"));
 
-    document.getElementById("prevent").addEventListener("click",() => {
+}
+
+function setSkillGraphsEvents() {
+    document.getElementById("prevent").addEventListener("click", () => {
         radialG.start -= radialG.skillsOffset;
         if (radialG.start < 0) radialG.start = 0;
         document.getElementById("module-skills").innerHTML = "";
         drawSkillsGraph(skills, document.getElementById("module-skills"));
     });
 
-    document.getElementById("next").addEventListener("click",() => {
+    document.getElementById("next").addEventListener("click", () => {
         if (radialG.start + radialG.skillsOffset < skills.length) radialG.start += radialG.skillsOffset;
         document.getElementById("module-skills").innerHTML = "";
         drawSkillsGraph(skills, document.getElementById("module-skills"));
     });
-    drawSkillsGraph(skills, document.getElementById("module-skills"));
-    
 }
 
-
-
 const handleResize = debounce(() => {
-    document.getElementById("module-skills").innerHTML = "";
-    document.getElementById("module-xpByTime").innerHTML = "";
-    drawSimpleGraph(xpByTimeData, document.getElementById("module-xpByTime"), totaleXp);
-    drawSkillsGraph(skills, document.getElementById("module-skills"));
+    if (document.getElementById("profile")) {
+        document.getElementById("module-skills").innerHTML = "";
+        document.getElementById("module-xpByTime").innerHTML = "";
+        document.querySelector(".p-graph2 svg").innerHTML = "";
+        drawSimpleGraph(xpByTimeData, document.getElementById("module-xpByTime"), totaleXp);
+        drawSkillsGraph(skills, document.getElementById("module-skills"));
+        renderGraph();
+    }
 }, 300);
 
 window.addEventListener("resize", handleResize);

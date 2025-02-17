@@ -7,11 +7,12 @@ export function drawSimpleGraph(data, svg, totaleXp) {
     const minTime = data[0][2];
     const maxTime = data[data.length - 1][2];
 
-    drawLine(svg, 40, svgHeight - 30, svgWidth - 20, svgHeight - 30, "black");
-    drawLine(svg, 40, 10, 40, svgHeight - 30, "black")
-    drawLabel(35, 9, "xp", svg, null, 12);
-    drawLabel(svgWidth - 18, svgHeight - 27, "T", svg, null, 12);
-
+    let Height = 50;
+    for(let j = 0; j < 5; j++) {
+        drawLine(svg, 20, Height, svgWidth - 20, Height, "#777");
+        Height += 80
+    }
+    
     let cumulXp = 0;
     const lastPointCord = [];
     for (let i = 0; i < data.length; i++) {
@@ -28,6 +29,7 @@ export function drawSimpleGraph(data, svg, totaleXp) {
                 pointXp += data[i][1];
                 time = data[i][2];
                 i++;
+                if(i == data.length) break
             }
             i--;
         }
@@ -40,16 +42,16 @@ export function drawSimpleGraph(data, svg, totaleXp) {
         point.labels = [];
 
         // XP lebel
-        drawLabel(3, yPos + 6, `+${Math.round(pointXp / 1000)}KB`, svg, point, 10, i, data.length);
+        drawLabel(3, yPos + 6, `+${Math.round(pointXp / 1000)}KB`, svg, point, 10);
 
         // Time lebel
         const month = time.toLocaleString('default', { month: 'short' });
         const day = String(time.getDate()).padStart(2, '0');
         const formattedDate = `${month} ${day}`;
-        drawLabel(xPos - 15, svgHeight - 15, formattedDate, svg, point, 10, i, data.length);
+        drawLabel(xPos - 15, svgHeight - 15, formattedDate, svg, point, 10);
 
         // Project name label
-        drawLabel(60, 20, name, svg, point, 16, i, data.length);
+        drawLabel(60, 20, name, svg, point, 16);
         if (i == 0) {
             lastPointCord[0] = xPos;
             lastPointCord[1] = yPos

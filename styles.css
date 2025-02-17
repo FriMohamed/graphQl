@@ -116,7 +116,7 @@ button:hover {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #777;
+  background-color: #888;
   cursor: pointer;
 }
 
@@ -206,7 +206,6 @@ button:hover {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 10px;
 }
 
@@ -217,12 +216,12 @@ button:hover {
   min-width: 400px;
   height: 400px;
   background-color: #888;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
-.graph svg {
+svg {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 }
 
 #skills div {
@@ -243,7 +242,46 @@ button:hover {
   bottom: 5px;
 }
 
-/* Responsive Design */
+#piscines {
+  position: relative;
+  width: 98%;
+  margin: 10px auto;
+  background-color: #666;
+  padding: 40px 5px 5px 5px;
+}
+
+#piscines select, #p-level, #p-xp {  
+  position: absolute;
+  top: 4px;
+  background-color: #888;
+  color: #fff;
+  font-size: 14px;
+  padding: 1px;
+}
+
+.p-graph2 {
+  width: 98%;
+  height: 400px;
+  background-color: #888;
+  /* border-radius: 8px; */
+  margin: auto;
+}
+
+#p-level, #p-xp{
+  top: 5px;
+  right: 10px;
+  padding: 4px;
+  font-size: 14px;
+}
+
+#p-level {
+  right: 120px;
+}
+
+#p-level span, #p-xp span {
+  color: black;
+}
+
 @media (max-width: 600px) {
   .login-box {
     padding: 20px;
@@ -295,4 +333,14 @@ button:hover {
   .graph {
     flex: 1 1 100%;
   }
+
+  .graph1, .graph2 {
+    flex: 1 1 100%;
+  }
+
+  #piscines {
+    position: relative;
+    top: 100px;
+  }
+
 }

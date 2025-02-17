@@ -29,7 +29,7 @@ export async function renderUserInfo(token) {
         });
         document.querySelector("#level span").textContent = level;
         if (xp / 1000 >= 1000) {
-            xp = (xp / 10000).toFixed(2);
+            xp = (xp / 1000000).toFixed(2);
             unit = "MB"
         } else xp = Math.round(xp / 1000);
 

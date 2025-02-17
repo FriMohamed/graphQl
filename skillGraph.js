@@ -8,6 +8,8 @@ export const radialG = {
 export function drawSkillsGraph(data, svg) {
     let end = radialG.start + radialG.skillsOffset;
     if (end > data.length) end = data.length;
+    if (end - radialG.start == 2) radialG.start -= 1;
+    else if (end - radialG.start == 1) radialG.start -= 2;
     const svgRect = svg.getBoundingClientRect();
     const svgWidth = svgRect.width;
     const svgHeight = svgRect.height;
