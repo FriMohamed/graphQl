@@ -216,7 +216,6 @@ button:hover {
   min-width: 400px;
   height: 400px;
   background-color: #888;
-  /* border-radius: 8px; */
 }
 
 svg {
@@ -263,7 +262,6 @@ svg {
   width: 98%;
   height: 400px;
   background-color: #888;
-  /* border-radius: 8px; */
   margin: auto;
 }
 

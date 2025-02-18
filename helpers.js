@@ -1,3 +1,18 @@
+async function queryData(token, query) {
+    const respons = await fetch("https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            query: query
+        })
+    });
+
+    const data = await respons.json();
+    return data.data ? data.data : null;
+}
+
 function drawLine(svg, x1, y1, x2, y2, color, w) {
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', x1);
@@ -92,4 +107,4 @@ const debounce = (func, wait = 0) => {
     }
 }
 
-export {debounce, drawLabel, drawLine, drawPoint, drawCircle, drawPolyline, drawText};
+export {debounce, drawLabel, drawLine, drawPoint, drawCircle, drawPolyline, drawText, queryData};
