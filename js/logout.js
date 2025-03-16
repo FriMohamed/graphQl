@@ -1,5 +1,5 @@
-import { setLoginEvents } from "./login.js";
-import { loginHtml } from "./templates.js";
+import { setLoginView } from "./index.js";
+import { cleaners} from "./profile.js";
 
 export function setLogOutLogic() {
     const logOutBtn = document.querySelector("#user-name div");
@@ -11,9 +11,18 @@ export function setLogOutLogic() {
         logOutBtn.classList.add("hidden");
     })
 
+    cleaners.push(() => {
+        document.querySelector("#user-name").removeEventListener("mouseover", (e) => {
+            logOutBtn.classList.remove("hidden");
+        })
+
+        document.querySelector("#user-name").removeEventListener("mouseout", (e) => {
+            logOutBtn.classList.add("hidden");
+        })
+    })
+
     logOutBtn.addEventListener("click", () => {
-        document.body.innerHTML = loginHtml;
         localStorage.clear("jwt");
-        setLoginEvents();
+        setLoginView();
     })
 }

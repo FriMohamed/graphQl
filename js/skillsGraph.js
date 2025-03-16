@@ -1,5 +1,6 @@
 import { drawCircle, drawText, drawPolyline, drawLine } from "./helpers.js";
 import { skills } from "./moduleData.js";
+import { cleaners } from "./profile.js";
 
 let offset = 8, start = 0;
 function drawSkillsGraph(svg) {
@@ -70,6 +71,21 @@ function setSkillGraphsEvents() {
         if (start + offset < skills.length) start += offset;
         document.getElementById("module-skills").innerHTML = "";
         drawSkillsGraph(document.getElementById("module-skills"));
+    });
+
+    cleaners.push(() => {
+        document.getElementById("prevent").removeEventListener("click", () => {
+            start -= offset;
+            if (start < 0) start = 0;
+            document.getElementById("module-skills").innerHTML = "";
+            drawSkillsGraph(document.getElementById("module-skills"));
+        });
+
+        document.getElementById("next").removeEventListener("click", () => {
+            if (start + offset < skills.length) start += offset;
+            document.getElementById("module-skills").innerHTML = "";
+            drawSkillsGraph(document.getElementById("module-skills"));
+        });
     });
 }
 

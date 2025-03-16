@@ -5,6 +5,8 @@ import { queryPeiscineData, renderPiscineInfo, selectEvent, totalPiscineXp, xpBy
 import { drawSimpleGraph } from "./simpleGraph.js";
 import { drawSkillsGraph } from "./skillsGraph.js";
 
+export let cleaners = [];
+
 export async function renderProfile() {
     await queryUserInfo();
     renderUserInfo();
@@ -34,4 +36,11 @@ function resizing() {
     }, 300);
 
     window.addEventListener("resize", handleResize);
+    cleaners.push(() => window.removeEventListener("resize", handleResize));
+}
+
+export function clearProfileEvents() {
+    console.log("clearing profile events");
+    cleaners.forEach(cleaner => cleaner());
+    cleaners = [];
 }

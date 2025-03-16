@@ -1,4 +1,5 @@
 import { queryData } from "./helpers.js";
+import { cleaners } from "./profile.js";
 import { drawSimpleGraph } from "./simpleGraph.js";
 
 let level = 0, xpByTimePiscineData = [], totalPiscineXp = 0;
@@ -55,6 +56,15 @@ function selectEvent() {
         await queryPeiscineData(select.value);
         renderPiscineInfo();
         drawSimpleGraph(xpByTimePiscineData, document.querySelector(".p-graph2 svg"), totalPiscineXp);
+    })
+
+    cleaners.push(() => {
+        select.removeEventListener("change", async () => {
+            document.querySelector(".p-graph2 svg").innerHTML = "";
+            await queryPeiscineData(select.value);
+            renderPiscineInfo();
+            drawSimpleGraph(xpByTimePiscineData, document.querySelector(".p-graph2 svg"), totalPiscineXp);
+        })
     })
 }
 
