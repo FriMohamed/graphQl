@@ -3,6 +3,7 @@ import { skills } from "./moduleData.js";
 import { cleaners } from "./profile.js";
 
 let offset = 8, start = 0;
+export function insial() { start = 0 }
 function drawSkillsGraph(svg) {
     let end = start + offset;
     if (end > skills.length) end = skills.length;
@@ -13,7 +14,7 @@ function drawSkillsGraph(svg) {
     const svgHeight = svgRect.height;
     const cx = svgWidth * 0.5;
     const cy = svgHeight * 0.5;
-    const r = Math.min(svgWidth, svgHeight) * 0.40;
+    const r = Math.min(svgWidth, svgHeight) * 0.4;
 
     drawCircle(svg, cx, cy, r, 1, "black", "none");
     drawCircle(svg, cx, cy, 3, 0, "black", "black");
@@ -56,11 +57,11 @@ function drawSkillsGraph(svg) {
     }
 
     drawPolyline(svg, skillPoints);
-    setSkillGraphsEvents();
 }
 
-function setSkillGraphsEvents() {
+export function setSkillGraphsEvents() {
     document.getElementById("prevent").addEventListener("click", () => {
+        if (start == 0) return
         start -= offset;
         if (start < 0) start = 0;
         document.getElementById("module-skills").innerHTML = "";
@@ -68,6 +69,7 @@ function setSkillGraphsEvents() {
     });
 
     document.getElementById("next").addEventListener("click", () => {
+        if (start >= skills.length) return;
         if (start + offset < skills.length) start += offset;
         document.getElementById("module-skills").innerHTML = "";
         drawSkillsGraph(document.getElementById("module-skills"));

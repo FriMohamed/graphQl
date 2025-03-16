@@ -1,5 +1,5 @@
 import { setLoginView } from "./index.js";
-import { cleaners} from "./profile.js";
+import { cleaners } from "./profile.js";
 
 export function setLogOutLogic() {
     const logOutBtn = document.querySelector("#user-name div");

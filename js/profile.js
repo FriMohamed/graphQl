@@ -3,11 +3,13 @@ import { queryModuleData, xpByTimeModuleData, totalModuleXp } from "./moduleData
 import { queryUserInfo, renderUserInfo } from "./overViewData.js";
 import { queryPeiscineData, renderPiscineInfo, selectEvent, totalPiscineXp, xpByTimePiscineData } from "./piscineData.js";
 import { drawSimpleGraph } from "./simpleGraph.js";
-import { drawSkillsGraph } from "./skillsGraph.js";
+import { drawSkillsGraph, insial, setSkillGraphsEvents } from "./skillsGraph.js";
 
 export let cleaners = [];
 
 export async function renderProfile() {
+    insial();
+    setSkillGraphsEvents();
     await queryUserInfo();
     renderUserInfo();
 

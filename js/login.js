@@ -28,6 +28,7 @@ async function login(identifier, password) {
 function setLoginEvents() {
     document.querySelector("form").addEventListener("submit", (e) => {
         e.preventDefault()
+        console.log('form submitted');
         const usernameField = document.getElementById("identifier");
         const passwordField = document.getElementById("password");
         login(usernameField.value, passwordField.value);
